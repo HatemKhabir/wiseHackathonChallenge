@@ -1,0 +1,610 @@
+/* Google Font Import - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root{
+    /* ===== Colors ===== */
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+    --primary-color: #00b9ff;
+    --primary-color-light: #00b9ff;
+    --toggle-color: #00b9ff;
+    --text-color: #707070;
+
+    /* ====== Transition ====== */
+    --tran-03: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.3s ease;
+}
+
+body{
+    min-height: 100vh;
+    background-color: var(--body-color);
+    transition: var(--tran-05);
+}
+
+::selection{
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+body.dark{
+    --body-color: #18191a;
+    --sidebar-color: #242526;
+    --primary-color: #3a3b3c;
+    --primary-color-light: #3a3b3c;
+    --toggle-color: #fff;
+    --text-color: #ccc;
+}
+
+/* ===== Sidebar ===== */
+ .sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    padding: 10px 14px;
+    background: var(--sidebar-color);
+    transition: var(--tran-05);
+    z-index: 100;  
+}
+.sidebar.close{
+    width: 88px;
+}
+
+.sidebar .image-text img{
+    width: 40px;
+    border-radius: 6px;
+    align-items: center;
+}
+/* ===== Reusable code - Here ===== */
+.sidebar li{
+    height: 50px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+
+
+.hero{
+    width: 100%;
+    max-height: 30vh;
+}
+#logout i {
+    left: 90%;
+}
+.sidebar header .image,
+.sidebar .icon{
+    min-width: 60px;
+    border-radius: 6px;
+}
+.hero .icon{
+    min-width: 80px;
+    border-radius: 6px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+
+}
+.sidebar .icon{
+    min-width: 60px;
+    border-radius: 6px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.sidebar .text,
+.sidebar .icon{
+    color: var(--text-color);
+    transition: var(--tran-03);
+}
+
+.sidebar .text{
+    font-size: 17px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 1;
+}
+.sidebar.close .text{
+    opacity: 0;
+}
+/* =========================== */
+
+.sidebar header{
+    position: relative;
+}
+
+.sidebar header .image-text{
+    display: flex;
+    align-items: center;
+}
+.sidebar header .logo-text{
+    display: flex;
+    flex-direction: column;
+}
+@font-face {
+    font-family: myFirstFace ;
+    src: url(AvertaDemoPECuttedDemo-Regular.otf);
+}
+header .image-text .name {
+    font-family: myFirstFace;
+    margin-top: 2px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+header .image-text .profession{
+    font-size: 8px;
+    margin-top: -2px;
+    display: block;
+}
+
+.sidebar header .image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar header .image img{
+    width: 40px;
+    border-radius: 6px;
+}
+
+.sidebar header .toggle{
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    transform: translateY(-50%) rotate(180deg);
+    height: 25px;
+    width: 25px;
+    background-color: var(--primary-color);
+    color: var(--sidebar-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    cursor: pointer;
+    transition: var(--tran-05);
+}
+
+.sidebarc
+
+body.dark .sidebar header .toggle{
+    color: var(--text-color);
+}
+
+.sidebar.close .toggle{
+    transform: translateY(-50%) rotate(0deg);
+}
+
+.sidebar .menu{
+    margin-top: 40px;
+}
+
+.sidebar li.search-box{
+    border-radius: 6px;
+    background-color: var(--primary-color-light);
+    cursor: pointer;
+    transition: var(--tran-05);
+}
+
+.sidebar li.search-box input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: var(--primary-color-light);
+    color: var(--text-color);
+    border-radius: 6px;
+    font-size: 17px;
+    font-weight: 500;
+    transition: var(--tran-05);
+}
+
+.sidebar li a{
+    list-style: none;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: var(--tran-03);
+}
+
+.sidebar li a:hover{
+    background-color: var(--primary-color);
+}
+.sidebar li a:hover .icon,
+.sidebar li a:hover .text{
+    color: var(--sidebar-color);
+}
+body.dark .sidebar li a:hover .icon,
+body.dark .sidebar li a:hover .text{
+    color: var(--text-color);
+}
+
+.menu-bar li#logout{
+    margin-top: 120px;
+
+}
+
+.sidebar .menu-bar{
+    height: calc(100% - 55px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+}
+.hero{
+    width: 100%;
+    max-height: 25vh;
+    background: lightblue;
+    color :skyblue;
+}
+.menu-bar::-webkit-scrollbar{
+    display: none;
+}
+.sidebar .menu-bar .mode{
+    border-radius: 6px;
+    background-color: var(--primary-color-light);
+    position: relative;
+    transition: var(--tran-05);
+}
+
+.menu-bar .mode .sun-moon{
+    height: 50px;
+    width: 60px;
+}
+
+.mode .sun-moon i{
+    position: absolute;
+}
+.mode .sun-moon i.sun{
+    opacity: 0;
+}
+body.dark .mode .sun-moon i.sun{
+    opacity: 1;
+}
+body.dark .mode .sun-moon i.moon{
+    opacity: 0;
+}
+
+.menu-bar .bottom-content .toggle-switch{
+    position: absolute;
+    right: 0;
+    height: 100%;
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.toggle-switch .switch{
+    position: relative;
+    height: 22px;
+    width: 40px;
+    border-radius: 25px;
+    background-color: var(--toggle-color);
+    transition: var(--tran-05);
+}
+
+.switch::before{
+    content: '';
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    background-color: var(--sidebar-color);
+    transition: var(--tran-04);
+}
+
+body.dark .switch::before{
+    left: 20px;
+}
+
+.home{
+    position: absolute;
+    top: 0;
+    top: 0;
+    left: 250px;
+    height: 100vh;
+    width: calc(100% - 250px);
+    background-color: var(--body-color);
+    transition: var(--tran-05);
+}
+.home .text{
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-color);
+    padding: 12px 60px;
+}
+
+.sidebar.close ~ .home{
+    left: 78px;
+    height: 100vh;
+    width: calc(100% - 78px);
+}
+body.dark .home .text{
+    color: var(--text-color);
+}
+.title_city{
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    color: var(--text-color)
+}
+.graph_exp{
+    position: absolute;
+    bottom: 20%;
+    left: 20%;
+}
+.avg_money{
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    color: #00b9ff;
+}
+.my_trip_title_city{
+    position: absolute;
+    top: 15%;
+    left: 22%;
+    color: var(--text-color)
+}
+.Currency_flag_positon{
+    position: absolute;
+    top: 15%;
+    left: 19%;
+    border-radius: 20%;
+}
+.balance-avatar__round-currency-icon{
+    border-radius: 50%;
+}
+.css-7t4v1l {
+    position: absolute;
+    top: 20%;
+    left: 22%;
+    font-size: 42px;
+    color: #37517e;
+}
+.warning {
+    position: absolute;
+    top: 27%;
+    left: 22%;
+    font-size: 22px;
+    color: #2e4369;
+}
+.np-header__title {
+    position: absolute;
+    top: 38%;
+    left: 22%;
+    color: #5d7079;
+    font-size: 22px;
+}
+.tw-icon-tw-icon-eating-out{
+    position: absolute;
+    top: 45%;
+    left: 22%;
+    color: #5d7079;
+
+}
+.tw-icon-tw-icon-transport{
+    position: absolute;
+    top: 55%;
+    left: 22%;
+    color: #5d7079;
+}
+.tw-icon-tw-icon-groceries{
+    position: absolute;
+    top: 65%;
+    left: 22%;
+    color: #5d7079;
+}
+.tw-icon-tw-icon-e-commerce{
+    position: absolute;
+    top: 75%;
+    left: 22%;
+    color: #5d7079;
+}
+.css-7fnyde{
+    position: absolute;
+    top: 45%;
+    left: 35%;
+    font-size: 18px;
+}
+.css-7fnydddd{
+    position: absolute;
+    top: 75%;
+    left: 35%;
+    font-size: 18px;
+}
+.css-7fnydd{
+    position: absolute;
+    top: 55%;
+    left: 35%;
+    font-size: 18px;
+}
+.css-7fnyddd{
+    position: absolute;
+    top: 65%;
+    left: 35%;
+    font-size: 18px;
+}
+.css-18583pz{
+    position: absolute;
+    top: 48%;
+    left: 35%;
+}
+.css-18583pppp{
+    position: absolute;
+    top: 78%;
+    left: 35%;
+}
+.css-18583pp{
+    position: absolute;
+    top: 58%;
+    left: 35%;
+
+}
+.css-18583ppp{
+    position: absolute;
+    top: 68%;
+    left: 35%;
+}
+.price123{
+    position: absolute;
+    top: 75%;
+    left: 65%;
+}
+.price{
+    position: absolute;
+    top: 45%;
+    left: 65%;
+}
+.price1{
+    position: absolute;
+    top: 55%;
+    left: 65%;
+}
+.price12{
+    position: absolute;
+    top: 65%;
+    left: 65%;
+}
+.eur_price{
+
+    position: absolute;
+    top: 48%;
+    left: 65%;
+}
+.eur_price1{
+    position: absolute;
+    top: 58%;
+    left: 65%;
+}
+.eur_price12{
+    position: absolute;
+    top: 68%;
+    left: 65%;
+}
+.eur_price123{
+    position: absolute;
+    top: 78%;
+    left: 65%;
+}
+.High_spending{
+    position: absolute;
+    top: 82%;
+    left: 35%;
+    color: #da4242;
+    font-size: 13px;
+}
+.tw-money-input-box1{
+    position: absolute;
+    top: 32%;
+    left: 85%;
+    color: #37517e;
+    font-size: 13px;
+}
+.Accod{
+    
+    position: absolute;
+    top: 32%;
+    left: 65%;
+    font-size: 13px;
+    font-family: myFirstFace;
+}
+.your_city_budget{
+    position: absolute;
+    top: 20%;
+    left: 70%;
+    color: #00b9ff;
+
+}
+.tw-money-input-box2{
+    position: absolute;
+    top: 42%;
+    left: 85%;
+    color: #37517e;
+    font-size: 13px;
+}
+.tw-money-input-box3{
+    position: absolute;
+    top: 52%;
+    left: 85%;
+    color: #37517e;
+    font-size: 13px;
+}
+.tw-money-input-box4{
+    position: absolute;
+    top: 62%;
+    left: 85%;
+    color: #37517e;
+    font-size: 13px;
+}
+.tw-money-input-box5{
+    position: absolute;
+    top: 72%;
+    left: 85%;
+    color: #37517e;
+    font-size: 13px;
+}
+.tw-money-input-box6{
+    position: absolute;
+    top: 82%;
+    left: 85%;
+    color: #37517e;
+    font-size: 13px;
+}
+.Travel{
+    position: absolute;
+    top: 42%;
+    left: 65%;
+    font-size: 13px;
+}
+.food{
+    position: absolute;
+    top: 52%;
+    left: 65%;
+    font-size: 13px;
+
+}
+.Party{
+    position: absolute;
+    top: 62%;
+    left: 65%;
+    font-size: 13px;
+}
+.other{
+    position: absolute;
+    top: 72%;
+    left: 65%;
+    font-size: 13px;
+}
+.total{
+    position: absolute;
+    top: 82%;
+    left: 65%;
+    font-size: 13px;
+}

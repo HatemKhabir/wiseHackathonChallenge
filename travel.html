@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Display a map on a webpage</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+	<link href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css" rel="stylesheet">
+	<script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+
+    <script
+		src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+	<link rel="stylesheet"
+		href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css"
+		type="text/css">
+	<style>
+			.button-18 {
+  align-items: center;
+  background-color: #0A66C2;
+  border: 0;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 480px;
+  min-height: 40px;
+  min-width: 0px;
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  touch-action: manipulation;
+  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+}
+
+.button-18:hover,
+.button-18:focus { 
+  background-color: #16437E;
+  color: #ffffff;
+}
+
+.button-18:active {
+  background: #09223b;
+  color: rgb(255, 255, 255, .7);
+}
+
+.button-18:disabled { 
+  cursor: not-allowed;
+  background: rgba(0, 0, 0, .08);
+  color: rgba(0, 0, 0, .3);
+}
+
+		.mapboxgl-popup-content {
+			
+			text-align: center;
+     font-family: 'Open Sans', sans-serif;
+       }
+		#Chart{
+			width: 250px;
+		    height: 200px;
+		}
+		body {
+			margin: 20px;
+			padding: 20px;
+		}
+		.button {
+  border: none;
+  color: skyblue;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+#button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.countrySelected{
+	left: 80%;
+	bottom: 80%;
+	font-size: large;
+}
+.avgExpense{
+	left: 80%;
+	bottom: 80%;
+	font-size: large;
+
+}
+		.mapboxgl-popup img{
+			object-fit: fill;
+		}
+		#map {
+			position: fixed;
+			bottom: 2px;
+			height: 100%;
+			width: 100%;
+			border: 6px;
+			border-radius: 10px;
+			border-color: aquamarine;
+		}
+.mapboxgl-popup-content{
+	width: 400px;
+}
+		.mapboxgl-popup {
+			border-radius: 10px;
+			height: 600px;
+			width: 600px;
+			font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+		}
+	</style>
+</head>
+
+<body>
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="wise_fast_flag_navy_RGB.svg" alt="logo">
+                </span>
+
+                <div class="text logo-text">
+                    <span class="name">Wise</span>
+                    <span class="profession">Transfer Your Money Securly ! </span>
+                </div>
+            </div>
+
+            <i class='bx bx-chevron-right toggle'></i>
+        </header>
+
+        <div class="menu-bar">
+            <div class="menu">
+
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="Home.html">
+                            <i class='bx bx-home-alt icon' ></i>
+                            <span class="text nav-text">Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-wallet icon'></i>
+                            <span class="text nav-text">Cards</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bxs-group icon'></i>
+                            <span class="text nav-text">Receipients</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-customize icon'></i>
+                            <span class="text nav-text">Manage</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bxs-plane-alt icon'></i>
+                            <span class="text nav-text" href="/travel.html/">Travel</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="MyTrips.html">
+                            <i class='bx bxs-plane-land icon'></i>
+                            <span class="text nav-text">My Trips</span>
+                        </a>
+                    </li>
+				</li>
+				<li class="nav-link">
+					<a href="https://wise.com/profile/view/">
+						<i class='bx bxs-user-circle bx-lg bx-spin-hover icon'></i>
+						<span class="text nav-text">Profile</span>
+					</a>
+				</li>
+
+				<li id="logout" class="nav-link">
+					<a href="https://wise.com/logout">
+						<i class='bx bx-log-out bx-lg bx-fade-up-hover icon'></i>
+						<span class="text nav-text">Logout</span>
+					</a>
+				</li>
+
+                </ul>
+            </div>
+
+                
+        </div>
+
+    </nav>
+
+    <script>
+        const body = document.querySelector('body'),
+      sidebar = body.querySelector('nav'),
+      toggle = body.querySelector(".toggle"),
+      searchBtn = body.querySelector(".search-box"),
+      modeSwitch = body.querySelector(".toggle-switch"),
+      modeText = body.querySelector(".mode-text");
+
+
+toggle.addEventListener("click" , () =>{
+    sidebar.classList.toggle("close");
+})
+
+
+modeSwitch.addEventListener("click" , () =>{
+    body.classList.toggle("dark");
+    
+    if(body.classList.contains("dark")){
+        modeText.innerText = "Light mode";
+    }else{
+        modeText.innerText = "Dark mode";
+        
+    }
+});
+
+    </script>
+    <div id="info-box">Click a City</div>
+
+	<span id="countrySelect"></span>
+	<span id="avgExpens"></span>
+	<div id="map"></div>
+	<script>
+
+function myFunction(x){
+	avgExpense=x;
+}
+var avgExpense=null;
+var countrySelected="";
+		mapboxgl.accessToken = 'pk.eyJ1IjoiaGF0ZW1raGFib3IiLCJhIjoiY2w5ajU1eXRtMWlmZzNwbzA5YWd3YjdqMyJ9.kK-C3nP8wFi7RPydwcL_cQ';
+		const map = new mapboxgl.Map({
+			container: 'map', // container ID
+			// Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+			style: 'mapbox://styles/hatemkhabor/cl9j67hha000214p2qvc0opwj', // style URL
+			center: [10.0163, 50.727],
+			zoom: 4,
+		});
+		map.on('load', () => {
+			map.addSource('places', {
+				'type': 'geojson',
+				'data': {
+					'type': 'FeatureCollection',
+					'features': [
+						{
+							'type': 'Feature',
+							'properties': {
+								'description':
+									'<h2 style="border-bottom:2px black solid;margin-bottom:2px;"><strong>Average Expenses : 300EUR/week</strong></h2><img src="chart1.png" id="Chart" alt="charts"><button class="button-18" role="button"onclick=window.open("Hungary.html")>Set Destination</button>'
+
+							},
+							'geometry': {
+								'type': 'Point',
+								'coordinates': [19.3584, 47.13454]
+							}
+						},
+						{
+							'type': 'Feature',
+							'properties': {
+								'description':
+									'<h2 style="border-bottom:2px black solid;margin-bottom:2px;"><strong>Average Expenses : 400EUR/week</strong></h2><img src="chart2.png" id="Chart" alt="charts"><button class="button-18" role="button" onclick=window.open("prague.html")>Set Destination</button>'
+							},
+							'geometry': {
+								'type': 'Point',
+								'coordinates': [14.84535, 50.24513]
+							}
+						},
+						{
+							'type': 'Feature',
+							'properties': {
+								'description':
+									'<h2 style="border-bottom:2px black solid;margin-bottom:2px;"><strong>Average Expenses : 250EUR/week</strong></h2><img src="chart3.png" id="Chart" alt="charts"><button class="button-18" role="button"onclick=window.open("berlin.html")>Set Destination</button>'
+							},
+							'geometry': {
+								'type': 'Point',
+								'coordinates': [13.3785, 52.215428]
+							}
+						},
+						{
+							'type': 'Feature',
+							'properties': {
+								'description':
+									'<h2 style="font-family:myFirstFace;border-bottom:2px black solid;margin-bottom:2px;"> <strong>Average Expenses : 450EUR/week</strong></h2><img src="chart4.png" id="Chart" alt="charts"><button class="button-18" role="button" onclick=window.open("Geneva.html")>Set Destination</button>'
+							},
+							'geometry': {
+								'type': 'Point',
+								'coordinates': [6.135, 46.19585]
+							}
+						},
+						{
+							'type': 'Feature',
+							'properties': {
+								'description':
+									'<h2 style="font-family:myFirstFace;border-bottom:2px black solid;margin-bottom:2px;"><strong>Average Expenses : 500EUR/week</strong></h2><img src="chart5.png" id="Chart" alt="charts"><button class="button-18" role="button" onclick=window.open("paris.html")>Set Destination</button>'
+							},
+							'geometry': {
+								'type': 'Point',
+								'coordinates': [2.32565, 48.38568]
+							}
+						}
+					
+					]
+				}
+			});
+			// Add a layer showing the places.
+			map.addLayer({
+				'id': 'places',
+				'type': 'circle',
+				'source': 'places',
+				'paint': {
+					'circle-color': '#4264fb',
+					'circle-radius': 6,
+					'circle-stroke-width': 2,
+					'circle-stroke-color': '#ffffff'
+				}
+			});
+			class ClickableMarker extends mapboxgl.Marker {
+      // new method onClick, sets _handleClick to a function you pass in
+      onClick(handleClick) {
+        this._handleClick = handleClick;
+        return this;
+      }
+
+      // the existing _onMapClick was there to trigger a popup
+      // but we are hijacking it to run a function we define
+      _onMapClick(e) {
+        const targetElement = e.originalEvent.target;
+        const element = this._element;
+
+        if (this._handleClick && (targetElement === element || element.contains((targetElement)))) {
+          this._handleClick();
+        }
+      }
+    };
+
+    const cities = [
+      {
+        name: 'Hungary',
+        coordinates: [ 19.3584, 47.13454],
+      },
+      {
+        name: 'Prague',
+        coordinates: [ 14.84535, 50.24513 ],
+      },
+      {
+        name: 'Berlin',
+        coordinates: [ 13.3785, 52.215428],
+      },
+      {
+        name: 'Geneva',
+        coordinates: [6.135, 46.19585],
+      },
+      {
+        name: 'Paris',
+        coordinates: [2.32565, 48.38568],
+      },
+    ];
+
+switch (countrySelected) {
+  case avgExpense==500:
+    countrySelected="Paris";
+    break;
+  case avgExpense==400:countrySelected="Prague";
+  break;
+  case avgExpense==250:
+ countrySelected="Berlin";
+  break;
+  case avgExpense==300:countrySelected="Hungary";
+ break; 
+ case avgExpense==450:countrySelected="Geneva";
+ break; 
+}	 
+	document.getElementById("countrySelect").innerHTML=countrySelected;
+	document.getElementById("avgExpens").innerHTML=avgExpense;
+	map.on('click', 'places', (e) => {
+const coordinates = e.features[0].geometry.coordinates.slice();
+const description = e.features[0].properties.description;
+ 
+while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+}
+map.on('mouseover', 'source-id', e => {
+  map.getCanvas().style.cursor = 'pointer'
+})
+map.on('mouseleave', 'source-id', e => {
+  map.getCanvas().style.cursor = ''
+})
+new mapboxgl.Popup()
+.setLngLat(coordinates)
+.setHTML(description)
+.addTo(map);
+});
+ 
+// Change the cursor to a pointer when the mouse is over the places layer.
+map.on('mouseenter', 'places', () => {
+map.getCanvas().style.cursor = 'pointer';
+});
+ 
+// Change it back to a pointer when it leaves.
+map.on('mouseleave', 'places', () => {
+map.getCanvas().style.cursor = '';
+});
+});
+		map.addControl(new mapboxgl.GeolocateControl({
+			positionOptions: {
+				enableHighAccuracy: true
+			},
+			trackUserLocation: true,
+			showUserHeading: true
+		}));
+		map.addControl(
+			new MapboxGeocoder({
+				accessToken: mapboxgl.accessToken,
+				mapboxgl: mapboxgl
+			})
+		);
+	</script>
+</body>
+
+</html>
